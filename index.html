@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>School Clubs</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Henny+Penny&family=Schoolbell&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #fff5f5; /* light cream for contrast */
+        font-family: 'Schoolbell', cursive;
+        color: palevioletred;
+        padding: 40px;
+    }
+    .container {
+        max-width: 700px;
+        background-color: #ffe6f0;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+        font-family: 'Henny Penny', cursive;
+        color: palevioletred;
+        margin-bottom: 30px;
+    }
+    #club-info {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #fff0f5;
+        border-left: 6px solid palevioletred;
+        border-radius: 8px;
+    }
+    select {
+        color: palevioletred;
+    }
+    footer {
+        margin-top: 30px;
+        text-align: center;
+        font-size: 0.9rem;
+        color: palevioletred;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Select a School Club</h2>
+    <select class="form-select" id="clubSelect" onchange="showClubInfo()">
+        <!-- Options will be generated dynamically -->
+    </select>
+
+    <div id="club-info"></div>
+</div>
+
+<footer>
+    Samantha Rebadulla 10R |. 2Q Skills Test
+</footer>
+
+<script>
+    // Club data stored in dictionary + list
+    const clubs = {
+        "Science Club": [
+            "Explore scientific experiments and projects.",
+            "Fridays, 3:00 PM",
+            "Room 101",
+            "Mr. Santos",
+            25
+        ],
+        "Art Club": [
+            "Express creativity through painting, sculpture, and crafts.",
+            "Wednesdays, 2:30 PM",
+            "Art Studio",
+            "Ms. Reyes",
+            30
+        ],
+        "Math Club": [
+            "Solve challenging math problems and participate in competitions.",
+            "Mondays, 3:30 PM",
+            "Room 202",
+            "Mr. Cruz",
+            20
+        ],
+        "Drama Club": [
+            "Perform plays and learn acting techniques.",
+            "Thursdays, 4:00 PM",
+            "Auditorium",
+            "Ms. Gomez",
+            18
+        ],
+        "Music Club": [
+            "Learn and perform musical pieces.",
+            "Tuesdays, 3:00 PM",
+            "Music Room",
+            "Mr. De Leon",
+            22
+        ],
+        "Debate Club": [
+            "Develop public speaking and argumentation skills.",
+            "Fridays, 2:00 PM",
+            "Room 305",
+            "Ms. Tan",
+            28
+        ],
+        "Environmental Club": [
+            "Participate in eco-friendly projects and campaigns.",
+            "Thursdays, 3:30 PM",
+            "Room 110",
+            "Ms. Flores",
+            24
+        ],
+        "Volleyball Varsity": [
+            "Represent the school in volleyball competitions.",
+            "Mondays & Wednesdays, 5:00 PM",
+            "Gymnasium",
+            "Coach Rivera",
+            15
+        ],
+        "Basketball Varsity": [
+            "Compete in basketball tournaments and training.",
+            "Tuesdays & Thursdays, 5:00 PM",
+            "Gymnasium",
+            "Coach Morales",
+            16
+        ],
+        "Baking Club": [
+            "Learn baking techniques and share recipes.",
+            "Fridays, 2:30 PM",
+            "Home Economics Room",
+            "Ms. Delos Santos",
+            20
+        ]
+    };
+
+    const keys = ["Description", "Meeting Time", "Location", "Club Moderator", "Number of Members"];
+
+    // Dynamically generate dropdown options from dictionary keys
+    const select = document.getElementById("clubSelect");
+    Object.keys(clubs).forEach(club => {
+        const option = document.createElement("option");
+        option.value = club;
+        option.textContent = club;
+        select.appendChild(option);
+    });
+
+    // Display club info using data types only
+    function showClubInfo() {
+        const selected = select.value;
+        const infoDiv = document.getElementById('club-info');
+        const values = clubs[selected] || ["N/A", "N/A", "N/A", "N/A", "N/A"];
+        
+        const html = [selected].concat(values).map((val, idx) => {
+            return idx === 0 ? `<h4>${val}</h4>` : `<p><strong>${keys[idx-1]}:</strong> ${val}</p>`;
+        }).join('');
+        
+        infoDiv.innerHTML = html;
+    }
+</script>
+
+</body>
+</html>
